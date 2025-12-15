@@ -22,7 +22,9 @@ uses
   Controller.Servico.CEP in 'src\controller\services\Controller.Servico.CEP.pas',
   Entidade.CEP in 'src\model\entities\Entidade.CEP.pas',
   Controller.Atualizacao in 'src\controller\Controller.Atualizacao.pas',
-  Controller.Servico.Atualizacao in 'src\controller\services\Controller.Servico.Atualizacao.pas';
+  Controller.Servico.Atualizacao in 'src\controller\services\Controller.Servico.Atualizacao.pas',
+  Controller.Importacao in 'src\controller\Controller.Importacao.pas',
+  Controller.Servico.Importacao in 'src\controller\services\Controller.Servico.Importacao.pas';
 
 {$R *.res}
 

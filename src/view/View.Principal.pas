@@ -71,6 +71,9 @@ type
     pnlAtualizarEnderecos   : TPanel;
     shpAtualizarEnderecos   : TShape;
     btnAtualizarEnderecos   : TSpeedButton;
+    pnlImportarMassa: TPanel;
+    shpImportarMassa: TShape;
+    btnImportarMassa: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -79,6 +82,7 @@ type
     procedure btnPrimeiraClick(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnAtualizarEnderecosClick(Sender: TObject);
+    procedure btnImportarMassaClick(Sender: TObject);
   private
     FDConnImpl                    : IFDConnection;
     FControllerPessoa             : TControllerPessoa;
@@ -96,6 +100,7 @@ var
 implementation
 
 uses
+  Controller.Importacao,
   System.Diagnostics,
   View.CadastroPessoa,
   View.Splashscreen;
@@ -116,7 +121,12 @@ begin
       cdsCadastroDocumento.AsString      := FormatMaskText(IfThen(Pessoa.FLNatureza = 1, '000.000.000-00;0', '00.000.000/0000-00;0'), Pessoa.DSDocumento);
       cdsCadastroNome.AsString           := Concat(Pessoa.NMPrimeiro, ' ', Pessoa.NMSegundo);
       cdsCadastroDataRegistro.AsDateTime := Pessoa.DTRegistro;
-      cdsCadastroEndereco.AsString       := FControllerEnderecoIntegracao.ListarEnderecoPorIDPessoa(Pessoa.IDPessoa).NMLogradouro;
+      var LEndereco                      := FControllerEnderecoIntegracao.ListarEnderecoPorIDPessoa(Pessoa.IDPessoa);
+      if Assigned(LEndereco) then
+      begin
+        cdsCadastroEndereco.AsString := LEndereco.NMLogradouro;
+        LEndereco.Free;
+      end;
       cdsCadastro.Post;
     end;
     cdsCadastro.First;
@@ -157,6 +167,21 @@ begin
       LPessoa.Free;
       ShowMessage('Pessoa excluída com sucesso!');
     end;
+  end;
+end;
+
+procedure TfrmPrincipal.btnImportarMassaClick(Sender: TObject);
+begin
+  var LControllerImportacao := TControllerImportacao.Create(FDConnImpl.GetConnection);
+  try
+    var Stopwatch := TStopwatch.StartNew;
+    LControllerImportacao.Importar;
+    Stopwatch.Stop;
+    ShowMessage(FormatDateTime('hh:nn:ss', Stopwatch.Elapsed.TotalSeconds / SecsPerDay));
+  finally
+    LControllerImportacao.Free;
+    Tag := 1;
+    AtualizarGrid;
   end;
 end;
 

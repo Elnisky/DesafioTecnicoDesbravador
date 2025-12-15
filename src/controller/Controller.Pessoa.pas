@@ -17,7 +17,8 @@ type
     constructor Create(const AConexao: TCustomConnection);
     destructor Destroy; override;
     procedure Atualizar(const Pessoa: TPessoa);
-    procedure Inserir(const Pessoa: TPessoa);
+    procedure Inserir(const Pessoa: TPessoa); overload;
+    procedure Inserir(const ListaPessoas: TObjectList<TPessoa>); overload;
     procedure Excluir(const Pessoa: TPessoa);
     function ListarPessoas: TObjectList<TPessoa>; overload;
     function ListarPessoas(const Pagina: Integer): TObjectList<TPessoa>; overload;
@@ -51,6 +52,11 @@ end;
 procedure TControllerPessoa.Inserir(const Pessoa: TPessoa);
 begin
   FService.Inserir(Pessoa);
+end;
+
+procedure TControllerPessoa.Inserir(const ListaPessoas: TObjectList<TPessoa>);
+begin
+  FService.Inserir(ListaPessoas);
 end;
 
 function TControllerPessoa.ListarPessoas: TObjectList<TPessoa>;

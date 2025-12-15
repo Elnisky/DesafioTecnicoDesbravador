@@ -157,6 +157,8 @@
         <DCCReference Include="src\model\entities\Entidade.CEP.pas"/>
         <DCCReference Include="src\controller\Controller.Atualizacao.pas"/>
         <DCCReference Include="src\controller\services\Controller.Servico.Atualizacao.pas"/>
+        <DCCReference Include="src\controller\Controller.Importacao.pas"/>
+        <DCCReference Include="src\controller\services\Controller.Servico.Importacao.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -222,6 +222,48 @@ object frmPrincipal: TfrmPrincipal
         ExplicitTop = -4
       end
     end
+    object pnlImportarMassa: TPanel
+      AlignWithMargins = True
+      Left = 701
+      Top = 10
+      Width = 169
+      Height = 70
+      Margins.Left = 5
+      Margins.Top = 0
+      Margins.Right = 0
+      Margins.Bottom = 0
+      Align = alLeft
+      BevelOuter = bvNone
+      DoubleBuffered = False
+      ParentColor = True
+      ParentDoubleBuffered = False
+      TabOrder = 4
+      ExplicitLeft = 353
+      object shpImportarMassa: TShape
+        Left = 0
+        Top = 0
+        Width = 169
+        Height = 70
+        Align = alClient
+        Brush.Color = 14342621
+        Pen.Style = psClear
+        Shape = stRoundRect
+        ExplicitTop = 6
+        ExplicitWidth = 175
+      end
+      object btnImportarMassa: TSpeedButton
+        Left = 0
+        Top = 0
+        Width = 169
+        Height = 70
+        Align = alClient
+        Caption = 'Importar em massa'
+        Flat = True
+        OnClick = btnImportarMassaClick
+        ExplicitLeft = 64
+        ExplicitTop = -4
+      end
+    end
   end
   object pnlPaginacao: TPanel
     Left = 0
